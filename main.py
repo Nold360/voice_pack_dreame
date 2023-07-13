@@ -1,18 +1,20 @@
 import hashlib
+import yaml
 from pathlib import Path
 from time import sleep
 from typing import Dict
+from uberduck_api import UberAPI
 
-import yaml
-
-from fifteen_ai_api import FifteenAPI
+# CHANGE ME:
+api_key = ""
+api_secret = ""
+voice = "glados-p2"
 
 data_dir = Path("data/")
 
 replacements = {
     "3D": "Three-Dee"
 }
-
 
 def replace_text(text: str) -> str:
     for find, replace in replacements.items():
@@ -52,7 +54,7 @@ def hash_text(text: str) -> str:
 
 if __name__ == '__main__':
     db_file = Path("db.yaml")
-    api = FifteenAPI(character="GLaDOS")
+    api = UberAPI(api_key=api_key, api_secret=api_secret, voice=voice)
     if db_file.exists():
         db = DB.load(db_file)
     else:
@@ -65,7 +67,7 @@ if __name__ == '__main__':
         if id in {0, 200}:
             # don't load startup and shutdown sound
             continue
-        file_dir = data_dir / str(id)
+        file_dir = data_dir
         if id in db.done_hashes:
             if db.done_hashes[id] == hash:
                 continue
@@ -74,10 +76,9 @@ if __name__ == '__main__':
                 for file in file_dir.glob("*"):
                     file.unlink()
 
-        print("starting download")
         api.tts_to_wavs(file_dir, text)
         db.done_hashes[id] = hash
         db.save(db_file)
-        sleep(30)
+        sleep(1)
 
     db.save(db_file)

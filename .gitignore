@@ -3,3 +3,4 @@ backups/
 data/
 tmp/
 db.yaml
+__pycache__

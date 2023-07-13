@@ -1,13 +1,14 @@
 [tool.poetry]
 name = "voice_packs"
-version = "0.1.0"
+version = "0.2.0"
 description = ""
-authors = ["Lukas Winkler <git@lw1.at>"]
+authors = ["Lukas Winkler <git@lw1.at>", "Gerrit Pannek"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
 requests = "^2.27.1"
 PyYAML = "^6.0"
+uberduck = "^0.0.5"
 
 [tool.poetry.dev-dependencies]
 
