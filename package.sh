@@ -10,4 +10,4 @@ done
 
 echo "Packaging Voice Pack..."
 tar -C output/ -czf voice_pack.tar.gz .
-md5sum voice-pack.tar.gz
+md5sum voice_pack.tar.gz
